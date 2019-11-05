@@ -1,0 +1,18 @@
+{
+  "name": "neo-unified-api",
+  "version": "0.0.1",
+  "description": "A unified dapi interface for neo wallets",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Morgan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.12.5"
+  },
+  "dependencies": {
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4"
+  }
+}
