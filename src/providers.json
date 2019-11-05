@@ -1,0 +1,12 @@
+{
+    "O3": {
+        "web": "neoDapi",
+        "module": "neo-dapi"
+    },
+    "NEOLine": {
+        "web": "NEOLine"
+    },
+    "Teemo": {
+        "web": "Teemo"
+    }
+}
