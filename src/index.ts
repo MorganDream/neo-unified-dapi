@@ -1,4 +1,4 @@
-import { Provider, Networks, DapiInstance, AccountWithLabel, AccountWithPubKey, GetBalanceArgs, BalanceResults, GetStorageArgs, StorageResponse, InvokeReadArgs, GetBlockInputArgs, BlockDetails, GetBlockHeightInputArgs, BlockHeight, TransactionInputArgs, TransactionDetails, ApplicationLog, SendArgs, SendOutput, InvokeArgs, InvokeOutput, InvokeMultiArgs, SignedMessage, DeployArgs, DeployOutput } from './types';
+import { Provider, Networks, DapiInstance, AccountWithLabel, AccountWithPubKey, GetBalanceArgs, BalanceResults, GetStorageArgs, StorageResponse, InvokeReadArgs, GetBlockInputArgs, BlockDetails, GetBlockHeightInputArgs, BlockHeight, TransactionInputArgs, TransactionDetails, ApplicationLog, SendArgs, SendOutput, InvokeArgs, InvokeOutput, InvokeMultiArgs, SignedMessage, DeployArgs, DeployOutput, Event } from './types';
 
 const config = require('../providers.json');
 class NeoUnifiedDapi {
@@ -107,9 +107,40 @@ class NeoUnifiedDapi {
     public deploy = (args: DeployArgs): Promise<DeployOutput> => {
         return this._dapiInstance.deploy(args);
     }
+
+    public addEventListener = (event: Event, callback: Function) => {
+        switch (this._currentApi.name) {
+            case 'O3':
+                this._dapiInstance.addEventListener(this._dapiInstance[`Constants.EventName.${event}`], callback);
+                break;
+            case 'NEOLine':
+                this._dapiInstance.addEventListener(this._dapiInstance[`EVENT.${event}`], callback);
+                break;
+            case 'Teemo':
+                window.addEventListener(`Teemo.NEO.${event}`, callback as any);
+                break;
+            default:
+                this._dapiInstance.addEventListener(this._dapiInstance[`EVENT.${event}`], callback);
+        }
+    }
+
+    public removeEventListener = (event: Event, callback?: Function) => {
+        switch (this._currentApi.name) {
+            case 'O3':
+                this._dapiInstance.removeEventListener(this._dapiInstance[`Constants.EventName.${event}`]);
+                break;
+            case 'NEOLine':
+                this._dapiInstance.removeEventListener(this._dapiInstance[`EVENT.${event}`]);
+                break;
+            case 'Teemo':
+                window.removeEventListener(`Teemo.NEO.${event}`, callback as any);
+                break;
+            default:
+                this._dapiInstance.removeEventListener(this._dapiInstance[`EVENT.${event}`]);
+        }
+    }
 }
 
 const neoUnifiedDapi: NeoUnifiedDapi = new NeoUnifiedDapi();
-window['neoUnifiedDapi'] = neoUnifiedDapi;
 export default neoUnifiedDapi;
 

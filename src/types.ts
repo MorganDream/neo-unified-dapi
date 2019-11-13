@@ -32,6 +32,8 @@ export interface DapiInstance {
     invokeMulti: (args: InvokeMultiArgs) => Promise<InvokeOutput>;
     signMessage: ({message: string}) => Promise<SignedMessage>;
     deploy: (args: DeployArgs) => Promise<DeployOutput>;
+    addEventListener: (event: string, callback: Function) => void;
+    removeEventListener: (event: string) => void;
 }
 
 export interface Provider {
