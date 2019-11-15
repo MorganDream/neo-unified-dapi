@@ -4,15 +4,22 @@
   "description": "A unified dapi interface for neo wallets",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --mode development --watch",
+    "build": "webpack --mode development",
+    "dist": "webpack --mode production --env.DISTRIBUTION=true"
   },
   "author": "Morgan",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^12.12.5"
+    "@types/node": "^12.12.5",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4",
+    "tslint": "5.11.0",
+    "tslint-loader": "3.5.4"
   },
   "dependencies": {
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.6.4"
+    "ts-node": "^8.4.1",
+    "webpack": "4.21.0",
+    "webpack-cli": "3.1.2"
   }
 }
