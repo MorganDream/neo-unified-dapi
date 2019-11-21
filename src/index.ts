@@ -4,6 +4,15 @@ const config = require('../providers.json');
 class NeoUnifiedDapi {
     private _currentApi = null;
     private _dapiInstance: DapiInstance = null;
+    static Events =  {
+        READY: 'READY',
+        ACCOUNT_CHANGED: 'ACCOUNT_CHANGED',
+        NETWORK_CHANGED: 'NETWORK_CHANGED',
+        CONNECTED: 'CONNECTED',
+        DISCONNECTED: 'DISCONNECTED',
+        BLOCK_HEIGHT_CHANGED: 'BLOCK_HEIGHT_CHANGED',
+        TRANSACTION_CONFIRMED: 'TRANSACTION_CONFIRMED'
+    };
     
     public getAvailableWalletAPIs = () => {
         const walletAPIs = [];

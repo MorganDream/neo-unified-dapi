@@ -12,3 +12,39 @@ Neo Unified dApi(NUDApi) is to enable dApp to use one unified interface to invok
 
 ## Suggestions Welcomed
 Refer to https://github.com/MorganDream/neo-unified-dapi/issues/1
+
+## How to Use
+### Prepare
+NUDApi is just like a router for dApp to invoke different neo dapi wallet providers. 
+If dApp developer plans to include O3, you need to prepare as instructed on https://neodapidocs.o3.network/#installation.
+For web plugin wallets NEOLine and Teemo, developer don't have to specify anything.
+
+### Installation
+We have not released this, cdn and npm installations would be enabled after release.
+
+### Get available wallet APIs and select api
+```ts
+const apis = neoUnifiedDapi.getAvailableWalletAPIs();
+console.log(apis);
+
+// Choose API, developer could add some UI interface for users to choose
+const useApi = neoUnifiedDapi.useAPI(apis[0]);
+```
+
+### Invoke dApi
+The invocation of dApi is just like what's in https://github.com/neo-project/proposals/pull/69.
+Just pay attention: you have to choose api before you execute any invocations.
+```ts
+neoUnifiedDapi.getAccount().then(accountInfo => {
+    console.log(accountInfo)
+})
+```
+
+### Event Listener
+```ts
+neoUnifiedDapi.addEventListener(neoUnifiedDapi.Events.READY, () => {
+    neoUnifiedDapi.getAccount().then(accountInfo => {
+        console.log(accountInfo)
+    });
+})
+```
